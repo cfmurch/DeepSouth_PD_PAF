@@ -1,5 +1,5 @@
 # DeepSouth_PD_PAF
-Complete posit project for DOI:XXX; renv lock included for package versioning on R 4.1.3
+Complete posit project for DOI: 10.5281/zenodo.7869316; renv lock included for package versioning on R 4.1.3
 
 Currently generates HTML RMarkdown document (see Output) with all tables
 
