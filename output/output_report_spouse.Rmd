@@ -1,0 +1,96 @@
+---
+title: "PAF Summarization - Spouses Only"
+output:
+  html_document:
+    css: style.css
+  #  toc: yes
+  #  toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
+suppressPackageStartupMessages({
+  library(magrittr)
+  library(kableExtra)
+  library(pander)
+  library(flextable)
+})
+
+options(knitr.kable.NA = '')
+
+
+```
+
+
+## Primary Demographics and Subject Characteristics
+
+`r table_1_spouse`
+
+## Supplemental Demographics and Subject Characteristics
+
+```{r, echo = FALSE, results = 'asis'}
+
+one_off <- one_off_results_spouse
+kable(one_off, "html", 
+      align=c("l", rep("c", (ncol(one_off)-1))), 
+      escape=F, linesep="") %>%  
+  kable_styling(font_size=18, full_width=F, position="left")
+
+```
+
+
+## Unadjusted GLM
+
+```{r, echo = FALSE, results='asis'}
+
+tab3 <- unadj_glm_spouse
+
+invisible(lapply(names(tab3), function(.name){
+  .tab <- tab3[[.name]]
+ .tab <- 
+   kable(.tab, "html", 
+      align=c("l", rep("c", (ncol(.tab)-1))), 
+      escape=F, linesep="")
+ writeLines(.name)
+ writeLines(kable_styling(.tab, font_size=18, full_width=F, position="left"))
+}))
+
+
+```
+
+
+
+## Covariate Adjusted GLM
+```{r, echo = FALSE, results='asis'}
+
+tab4 <- adj_or_paf_spouse[["OR"]]
+
+invisible(lapply(names(tab4), function(.name){
+  .tab <- tab4[[.name]]
+ .tab <- 
+   kable(.tab, "html", 
+      align=c("l", rep("c", (ncol(.tab)-1))), 
+      escape=F, linesep="")
+ writeLines(.name)
+ writeLines(kable_styling(.tab, font_size=18, full_width=F, position="left"))
+}))
+
+```
+
+
+## Covariate Adjusted PAF
+```{r, echo = FALSE, results='asis'}
+
+tab5 <- adj_or_paf_spouse[["PAF"]]
+
+invisible(lapply(names(tab5), function(.name){
+  .tab <- tab5[[.name]]
+ .tab <- 
+   kable(.tab, "html", 
+      align=c("l", rep("c", (ncol(.tab)-1))), 
+      escape=F, linesep="")
+ writeLines(.name)
+ writeLines(kable_styling(.tab, font_size=18, full_width=F, position="left"))
+}))
+
+```
